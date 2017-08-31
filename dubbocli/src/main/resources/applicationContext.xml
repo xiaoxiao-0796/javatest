@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+        ">  
+  <!-- dubbo客户端 -->
+    <dubbo:application name="hello-world-client" />  
+  
+    <!-- 注册地址 -->  
+  <dubbo:registry protocol="zookeeper" address="117.48.201.192:2181" />
+  
+  <dubbo:reference id="orderQueryService" interface="com.bestpay.ecurrency.pcpf.api.order.OrderQueryService"
+    retries="0" timeout="20000" check="false"/>
+
+  <dubbo:reference id="orderQueryService1" interface="com.bestpay.ecurrency.bestpaycard.core.service.facade.OrderQueryService"
+                   retries="0" timeout="20000" check="false"/>
+
+
+  <bean id="springContextHelper" class="com.xiaofei.dubbocli.SpringContextHelper"/>
+  
+</beans>
