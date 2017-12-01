@@ -21,5 +21,16 @@ public class LogTest {
          log.info("info------------{},{},{},{}",2,4,6,9);
         log.warn("warn--------------");
         log.error("error------------");
+        "123".equals("123");
+    }
+
+    @Test
+    public void test1(){
+
+        int num=18;
+        //十进制转二进制
+        String binaryString = Integer.toBinaryString(num);
+        System.out.printf(binaryString);
+
     }
 }

@@ -65,4 +65,38 @@ public class Top45Test {
         System.out.println(sum-10*price);
     }
 
+    @Test
+    public void test2(){
+        long code = genCode(1);
+        System.out.println(code);
+    }
+    public long genCode(long seed) {
+        int arrShift[] =
+                {14, 6, 25, 20, 29, 22, 9, 27, 15, 18, 23, 21, 24, 13, 2, 4, 8, 26, 1, 28, 7, 3, 10, 19, 11, 16, 0, 12, 17, 5};
+        int arrReplace[] =
+                {20, 13, 19, 28, 16, 27, 0, 8, 24, 14, 3, 23, 17, 11, 26, 30, 22, 9, 25, 1, 7, 6, 29, 21, 18, 12, 5, 31, 10, 15, 4, 2};
+        int index, bitMask, bitMaskClear;
+        long code, tmp, randTime, rand;
+        randTime = System.currentTimeMillis() / 1000;
+        code = seed + ((randTime - 1356019200) & 1073740800);
+        for (int round = 0; round < 7; ++round) {
+            tmp = code;
+            for (int i = 0; i < 6; ++i) {
+                index = ((int) tmp >> (i * 5)) & 31;
+                bitMask = arrReplace[index] << (i * 5);
+                bitMaskClear = ~(31 << (i * 5));
+                code = (code & bitMaskClear) | bitMask;
+            }
+
+            tmp = code;
+            for (int i = 0; i < 30; ++i) {
+                bitMask = (tmp & (1 << arrShift[i])) > 0 ? (1 << i) : 0;
+                bitMaskClear = ~(1 << i);
+                code = (code & bitMaskClear) | bitMask;
+            }
+        }
+        rand = (int) (Math.random() * 8) + 1;
+        code = code | (rand << 30);
+        return code;
+    }
 }

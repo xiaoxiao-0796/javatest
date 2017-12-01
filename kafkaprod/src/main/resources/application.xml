@@ -36,7 +36,10 @@
     <bean id="KafkaTemplate" class="org.springframework.kafka.core.KafkaTemplate">
         <constructor-arg ref="producerFactory"/>
         <constructor-arg name="autoFlush" value="true"/>
-        <property name="defaultTopic" value="test"/>
+        <property name="defaultTopic" value="defaultTopic"/>
+        <property name="producerListener" ref="producerListener"/>
     </bean>
+
+    <bean id="producerListener" class="com.xiaofei.kafkaprod.KafkaProducerListener" />
 
 </beans>

@@ -40,10 +40,22 @@
         <property name="messageListener" ref="messageListernerConsumerService"/>
     </bean>
 
+    <!-- 消费者容器配置信息 -->
+    <bean id="containerProperties1" class="org.springframework.kafka.listener.config.ContainerProperties">
+        <constructor-arg value="test1"/>
+        <property name="messageListener" ref="messageListernerConsumerService"/>
+    </bean>
+
     <!-- 创建kafkatemplate bean，使用的时候，只需要注入这个bean，即可使用template的send消息方法 -->
     <bean id="messageListenerContainer" class="org.springframework.kafka.listener.KafkaMessageListenerContainer" init-method="doStart">
         <constructor-arg ref="consumerFactory"/>
         <constructor-arg ref="containerProperties"/>
+    </bean>
+
+    <!-- 创建kafkatemplate bean，使用的时候，只需要注入这个bean，即可使用template的send消息方法 -->
+    <bean id="messageListenerContainer1" class="org.springframework.kafka.listener.KafkaMessageListenerContainer" init-method="doStart">
+        <constructor-arg ref="consumerFactory"/>
+        <constructor-arg ref="containerProperties1"/>
     </bean>
 
 </beans>
